@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useEffect, useState } from "react";
 import { useTheme } from "./context/ThemeContext";
 
 import MainLayout from "./components/Layout/MainLayout";
@@ -17,10 +18,18 @@ import Debts from "./pages/Debts";
 import Profile from "./pages/Profile";
 import Statistics from "./pages/Statistics";
 import NotFound from "./pages/NotFound";
+import AppLoader from "./components/UI/AppLoader";
 
 export default function App() {
   const { theme } = useTheme();
+  const [initializing, setInitializing] = useState(true);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setInitializing(false), 650);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  if (initializing) return <AppLoader />;
   return (
     <>
       <Routes>

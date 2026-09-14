@@ -147,7 +147,7 @@ export default function Transactions() {
 
   const startLongPress = (id) => {
     clearTimeout(longPressTimer.current);
-    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 550);
+    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 2000);
   };
 
   const cancelLongPress = () => clearTimeout(longPressTimer.current);
@@ -309,9 +309,12 @@ export default function Transactions() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  onPointerDown={() => startLongPress(t.id)}
+                  onPointerDown={(event) => {
+                    event.currentTarget.setPointerCapture?.(event.pointerId);
+                    startLongPress(t.id);
+                  }}
                   onPointerUp={cancelLongPress}
-                  onPointerLeave={cancelLongPress}
+                  onPointerCancel={cancelLongPress}
                   onContextMenu={(event) => event.preventDefault()}
                   className={`relative py-4 ${
                     idx !== filtered.length - 1 ? "receipt-edge" : ""

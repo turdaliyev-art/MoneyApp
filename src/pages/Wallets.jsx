@@ -115,7 +115,7 @@ export default function Wallets() {
 
   const startLongPress = (id) => {
     clearTimeout(longPressTimer.current);
-    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 550);
+    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 2000);
   };
 
   const cancelLongPress = () => clearTimeout(longPressTimer.current);
@@ -164,9 +164,12 @@ export default function Wallets() {
               >
                 <Card
                   className="relative overflow-hidden p-5 group"
-                  onPointerDown={() => startLongPress(w.id)}
+                  onPointerDown={(event) => {
+                    event.currentTarget.setPointerCapture?.(event.pointerId);
+                    startLongPress(w.id);
+                  }}
                   onPointerUp={cancelLongPress}
-                  onPointerLeave={cancelLongPress}
+                  onPointerCancel={cancelLongPress}
                   onContextMenu={(event) => event.preventDefault()}
                 >
                   <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand/10 group-hover:bg-brand/20 transition-colors" />

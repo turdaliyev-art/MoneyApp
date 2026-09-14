@@ -31,6 +31,10 @@ export default {
         cardDark: "0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.6)",
       },
       keyframes: {
+        loaderDot: {
+          "0%, 80%, 100%": { opacity: "0.35", transform: "scale(0.75)" },
+          "40%": { opacity: "1", transform: "scale(1)" },
+        },
         fadeIn: {
           "0%": { opacity: 0, transform: "translateY(6px)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
@@ -43,6 +47,7 @@ export default {
       animation: {
         fadeIn: "fadeIn 0.35s ease-out both",
         popIn: "popIn 0.2s ease-out both",
+        loaderDot: "loaderDot 1s ease-in-out infinite",
       },
     },
   },

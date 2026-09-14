@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus, FiEdit2, FiTrash2 } from "react-icons/fi";
 import { FaPiggyBank } from "react-icons/fa6";
@@ -31,6 +31,15 @@ export default function Budgets() {
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [mobileActionsId, setMobileActionsId] = useState(null);
+  const longPressTimer = useRef(null);
+
+  const startLongPress = (id) => {
+    clearTimeout(longPressTimer.current);
+    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 2000);
+  };
+
+  const cancelLongPress = () => clearTimeout(longPressTimer.current);
 
   const load = async () => {
     setLoading(true);
@@ -161,7 +170,16 @@ export default function Budgets() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Card className="p-5">
+                  <Card
+                    className="p-5"
+                    onPointerDown={(event) => {
+                      event.currentTarget.setPointerCapture?.(event.pointerId);
+                      startLongPress(b.id);
+                    }}
+                    onPointerUp={cancelLongPress}
+                    onPointerCancel={cancelLongPress}
+                    onContextMenu={(event) => event.preventDefault()}
+                  >
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <p className="font-semibold text-sm">
@@ -171,7 +189,7 @@ export default function Budgets() {
                           {b.period === "weekly" ? "Haftalik" : b.period === "yearly" ? "Yillik" : "Oylik"}
                         </p>
                       </div>
-                      <div className="flex gap-1">
+                      <div className={`flex gap-1 transition-all duration-200 lg:opacity-100 ${mobileActionsId === b.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0 lg:pointer-events-auto"}`}>
                         <button
                           onClick={() => openEdit(b)}
                           className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10"

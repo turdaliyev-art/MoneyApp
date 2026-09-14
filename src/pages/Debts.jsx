@@ -129,7 +129,7 @@ export default function Debts() {
 
   const startLongPress = (id) => {
     clearTimeout(longPressTimer.current);
-    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 550);
+    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 2000);
   };
 
   const cancelLongPress = () => clearTimeout(longPressTimer.current);
@@ -203,9 +203,12 @@ export default function Debts() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onPointerDown={() => startLongPress(d.id)}
+                    onPointerDown={(event) => {
+                      event.currentTarget.setPointerCapture?.(event.pointerId);
+                      startLongPress(d.id);
+                    }}
                     onPointerUp={cancelLongPress}
-                    onPointerLeave={cancelLongPress}
+                    onPointerCancel={cancelLongPress}
                     onContextMenu={(event) => event.preventDefault()}
                     className={`grid grid-cols-[40px_minmax(0,1fr)] items-start gap-x-3 gap-y-2 py-4 lg:flex lg:items-center lg:gap-4 ${
                       idx !== filtered.length - 1 ? "receipt-edge" : ""

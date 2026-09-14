@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus, FiEdit2, FiTrash2 } from "react-icons/fi";
 import { FaTags, FaBagShopping, FaUtensils, FaCarSide, FaHouse, FaHeart, FaBriefcase, FaGift, FaPlane, FaGamepad, FaGraduationCap } from "react-icons/fa6";
@@ -54,6 +54,15 @@ export default function Categories() {
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [mobileActionsId, setMobileActionsId] = useState(null);
+  const longPressTimer = useRef(null);
+
+  const startLongPress = (id) => {
+    clearTimeout(longPressTimer.current);
+    longPressTimer.current = setTimeout(() => setMobileActionsId(id), 2000);
+  };
+
+  const cancelLongPress = () => clearTimeout(longPressTimer.current);
 
   const load = async () => {
     setLoading(true);
@@ -202,7 +211,16 @@ export default function Categories() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: i * 0.03 }}
                 >
-                  <Card className="p-5 group relative">
+                  <Card
+                    className="group relative p-5"
+                    onPointerDown={(event) => {
+                      event.currentTarget.setPointerCapture?.(event.pointerId);
+                      startLongPress(c.id);
+                    }}
+                    onPointerUp={cancelLongPress}
+                    onPointerCancel={cancelLongPress}
+                    onContextMenu={(event) => event.preventDefault()}
+                  >
                     <div className="flex items-start justify-between mb-5">
                       <div
                         className="h-12 w-12 rounded-full flex items-center justify-center"
@@ -217,7 +235,7 @@ export default function Categories() {
                         <p className="text-base font-semibold truncate">{c.name}</p>
                         <p className="mt-1 text-xs text-muted">{count} ta tranzaksiya</p>
                       </div>
-                      <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className={`flex gap-1 transition-all duration-200 lg:opacity-0 lg:group-hover:opacity-100 ${mobileActionsId === c.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0"}`}>
                         <button
                           onClick={() => openEdit(c)}
                           className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10"
