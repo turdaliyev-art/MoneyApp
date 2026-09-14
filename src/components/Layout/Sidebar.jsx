@@ -8,7 +8,6 @@ import {
   FaPiggyBank,
   FaBullseye,
   FaHandHoldingDollar,
-  FaReceipt,
 } from "react-icons/fa6";
 
 const links = [
@@ -54,16 +53,7 @@ export default function Sidebar({ open, onClose }) {
         <div className="flex items-center justify-between border-b border-lineLight px-5 py-4 dark:border-line">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand">
-              <FaReceipt size={19} className="text-ink" />
-            </div>
-
-            <div>
-              <p className="font-display font-bold leading-tight">
-                PulNazorat
-              </p>
-              <p className="text-[11px] leading-tight text-muted">
-                moliya nazorati
-              </p>
+              <FaWallet size={19} className="text-ink" />
             </div>
           </div>
 

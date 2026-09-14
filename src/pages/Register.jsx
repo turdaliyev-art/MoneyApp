@@ -38,26 +38,23 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-paper dark:bg-ink px-4 py-10">
+    <div className="flex min-h-[100dvh] items-center justify-center overflow-hidden bg-paper px-4 py-3 dark:bg-ink sm:py-8">
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="w-full max-w-md"
       >
-        <div className="flex flex-col items-center mb-8">
-          <div className="h-12 w-12 rounded-xl bg-brand flex items-center justify-center mb-3">
+        <div className="mb-3 flex flex-col items-center sm:mb-6">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand">
             <FiFileText size={24} className="text-ink" />
           </div>
-          <h1 className="font-display text-2xl font-bold">PulNazorat</h1>
-          <p className="text-sm text-muted mt-1">Yangi hisob yarating</p>
         </div>
 
-        <div className="bg-surfacelight dark:bg-surfacedark border border-lineLight dark:border-line rounded-2xl shadow-card dark:shadow-cardDark p-6 sm:p-8">
-          <h2 className="font-display text-xl font-semibold mb-1">Ro'yxatdan o'tish</h2>
-          <p className="text-sm text-muted mb-6">Bir necha soniyada hisob oching</p>
+        <div className="rounded-2xl border border-lineLight bg-surfacelight p-4 shadow-card dark:border-line dark:bg-surfacedark dark:shadow-cardDark sm:p-8">
+          <h2 className="mb-4 text-center font-display text-xl font-semibold sm:mb-5">Ro'yxatdan o'tish</h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-4">
             <Input
               label="To'liq ism"
               icon={FiUser}
@@ -99,7 +96,7 @@ export default function Register() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-muted mt-6">
+          <p className="mt-3 text-center text-sm text-muted sm:mt-6">
             Hisobingiz bormi?{" "}
             <Link to="/login" className="text-brand-dark dark:text-brand font-medium hover:underline">
               Tizimga kirish
