@@ -18,7 +18,7 @@ Budgets, Debts, Goals.
 
 ```bash
 npm install
-cp .env.example .env   # VITE_API_BASE_URL ni backend manzilingizga moslang
+cp .env.example .env   # VITE_API_URL ni backend manzilingizga moslang
 npm run dev
 ```
 
@@ -32,7 +32,7 @@ npm run preview
 
 `.env` faylida:
 ```
-VITE_API_BASE_URL=http://localhost:5000/api
+VITE_API_URL=https://moneyapp-backend-production-7c1d.up.railway.app
 ```
 
 ## Loyiha strukturasi

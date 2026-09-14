@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// Backend API manzilini shu yerda yoki .env faylida VITE_API_BASE_URL orqali sozlang
-export const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+// VITE_API_URL domen bo'lsa, backend API prefiksini avtomatik qo'shamiz.
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+export const BASE_URL = API_URL.replace(/\/$/, "").endsWith("/api")
+  ? API_URL.replace(/\/$/, "")
+  : `${API_URL.replace(/\/$/, "")}/api`;
 
 const api = axios.create({
   baseURL: BASE_URL,
