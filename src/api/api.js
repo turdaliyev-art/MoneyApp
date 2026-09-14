@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// VITE_API_URL domen bo'lsa, backend API prefiksini avtomatik qo'shamiz.
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// Vercel'da env sozlanmasa ham production so'rovlari Railway backend'iga boradi.
+const DEFAULT_API_URL = import.meta.env.DEV
+  ? "http://localhost:5000"
+  : "https://moneyapp-backend-production-7c1d.up.railway.app";
+const API_URL = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
 export const BASE_URL = API_URL.replace(/\/$/, "").endsWith("/api")
   ? API_URL.replace(/\/$/, "")
   : `${API_URL.replace(/\/$/, "")}/api`;
