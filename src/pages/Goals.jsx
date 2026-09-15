@@ -367,7 +367,10 @@ export default function Goals() {
                           )}
                         </div>
                       </div>
-                      <div className={`flex gap-1 transition-all duration-200 lg:opacity-100 ${mobileActionsId === g.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0 lg:pointer-events-auto"}`}>
+                      <div
+                        onPointerDown={(event) => event.stopPropagation()}
+                        className={`flex gap-1 transition-all duration-200 lg:opacity-100 ${mobileActionsId === g.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0 lg:pointer-events-auto"}`}
+                      >
                         <button
                           onClick={() => openEdit(g)}
                           className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10"

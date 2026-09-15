@@ -178,7 +178,10 @@ export default function Wallets() {
                     <div className="h-11 w-11 rounded-lg bg-brand/15 flex items-center justify-center">
                       <FaCreditCard size={20} className="text-brand-dark dark:text-brand" />
                     </div>
-                    <div className={`flex gap-1 lg:pointer-events-auto lg:opacity-100 ${mobileActionsId === w.id ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+                    <div
+                      onPointerDown={(event) => event.stopPropagation()}
+                      className={`flex gap-1 lg:pointer-events-auto lg:opacity-100 ${mobileActionsId === w.id ? "opacity-100" : "pointer-events-none opacity-0"}`}
+                    >
                       <button
                         onClick={() => openEdit(w)}
                         aria-label="Hamyonni tahrirlash"

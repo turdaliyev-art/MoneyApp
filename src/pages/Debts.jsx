@@ -243,7 +243,10 @@ export default function Debts() {
                         {statusLabel[d.status] || statusLabel.pending}
                       </button>
                     </div>
-                    <div className={`col-start-2 row-start-3 flex justify-end gap-1 shrink-0 lg:col-auto lg:row-auto lg:pointer-events-auto lg:opacity-100 ${mobileActionsId === d.id ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+                    <div
+                      onPointerDown={(event) => event.stopPropagation()}
+                      className={`col-start-2 row-start-3 flex justify-end gap-1 shrink-0 lg:col-auto lg:row-auto lg:pointer-events-auto lg:opacity-100 ${mobileActionsId === d.id ? "opacity-100" : "pointer-events-none opacity-0"}`}
+                    >
                       <button
                         onClick={() => openEdit(d)}
                         aria-label="Qarz yozuvini tahrirlash"

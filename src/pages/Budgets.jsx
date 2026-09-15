@@ -190,7 +190,10 @@ export default function Budgets() {
                           {b.period === "weekly" ? "Haftalik" : b.period === "yearly" ? "Yillik" : "Oylik"}
                         </p>
                       </div>
-                      <div className={`flex gap-1 transition-all duration-200 lg:opacity-100 ${mobileActionsId === b.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0 lg:pointer-events-auto"}`}>
+                      <div
+                        onPointerDown={(event) => event.stopPropagation()}
+                        className={`flex gap-1 transition-all duration-200 lg:opacity-100 ${mobileActionsId === b.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0 lg:pointer-events-auto"}`}
+                      >
                         <button
                           onClick={() => openEdit(b)}
                           className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10"

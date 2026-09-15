@@ -362,6 +362,7 @@ export default function Transactions() {
 
                 
 <div
+  onPointerDown={(event) => event.stopPropagation()}
   className={`absolute right-1 top-14 flex items-center gap-1.5 rounded-xl bg-surfacelight/95 p-1.5 shadow-lg backdrop-blur-sm dark:bg-surfacedark/95 transition-all duration-200 ${
     mobileActionsId === t.id
       ? "pointer-events-auto translate-y-0 opacity-100"

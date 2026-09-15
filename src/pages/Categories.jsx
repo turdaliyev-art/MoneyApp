@@ -236,7 +236,10 @@ export default function Categories() {
                         <p className="text-base font-semibold truncate">{c.name}</p>
                         <p className="mt-1 text-xs text-muted">{count} ta tranzaksiya</p>
                       </div>
-                      <div className={`flex gap-1 transition-all duration-200 lg:pointer-events-auto lg:opacity-0 lg:group-hover:opacity-100 ${mobileActionsId === c.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0"}`}>
+                      <div
+                        onPointerDown={(event) => event.stopPropagation()}
+                        className={`flex gap-1 transition-all duration-200 lg:pointer-events-auto lg:opacity-0 lg:group-hover:opacity-100 ${mobileActionsId === c.id ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-1 opacity-0"}`}
+                      >
                         <button
                           onClick={() => openEdit(c)}
                           className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10"
