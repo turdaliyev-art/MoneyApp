@@ -310,6 +310,7 @@ export default function Transactions() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   onPointerDown={(event) => {
+                    if (event.pointerType === "mouse") return;
                     event.currentTarget.setPointerCapture?.(event.pointerId);
                     startLongPress(t.id);
                   }}

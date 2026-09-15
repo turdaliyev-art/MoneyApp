@@ -165,6 +165,7 @@ export default function Wallets() {
                 <Card
                   className="relative overflow-hidden p-5 group"
                   onPointerDown={(event) => {
+                    if (event.pointerType === "mouse") return;
                     event.currentTarget.setPointerCapture?.(event.pointerId);
                     startLongPress(w.id);
                   }}

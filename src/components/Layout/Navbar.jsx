@@ -1,5 +1,6 @@
 import { FiMenu, FiSun, FiMoon, FiLogOut, FiChevronDown } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -38,9 +39,20 @@ export default function Navbar({ onMenuClick }) {
         <button
           onClick={toggleTheme}
           aria-label="Rejimni almashtirish"
-          className="p-2.5 rounded-lg border border-lineLight dark:border-line hover:border-brand transition-colors"
+          className="rounded-lg border border-lineLight p-2.5 transition-colors hover:border-brand dark:border-line"
         >
-          {theme === "dark" ? <FiSun size={17} /> : <FiMoon size={17} />}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={theme}
+              initial={{ opacity: 0, rotate: -90, scale: 0.65 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 90, scale: 0.65 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="flex"
+            >
+              {theme === "dark" ? <FiSun size={17} /> : <FiMoon size={17} />}
+            </motion.span>
+          </AnimatePresence>
         </button>
 
         <div className="relative" ref={ref}>

@@ -204,6 +204,7 @@ export default function Debts() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onPointerDown={(event) => {
+                      if (event.pointerType === "mouse") return;
                       event.currentTarget.setPointerCapture?.(event.pointerId);
                       startLongPress(d.id);
                     }}

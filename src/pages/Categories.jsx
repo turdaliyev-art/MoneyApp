@@ -214,6 +214,7 @@ export default function Categories() {
                   <Card
                     className="group relative p-5"
                     onPointerDown={(event) => {
+                      if (event.pointerType === "mouse") return;
                       event.currentTarget.setPointerCapture?.(event.pointerId);
                       startLongPress(c.id);
                     }}

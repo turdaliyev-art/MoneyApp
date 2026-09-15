@@ -173,6 +173,7 @@ export default function Budgets() {
                   <Card
                     className="p-5"
                     onPointerDown={(event) => {
+                      if (event.pointerType === "mouse") return;
                       event.currentTarget.setPointerCapture?.(event.pointerId);
                       startLongPress(b.id);
                     }}
